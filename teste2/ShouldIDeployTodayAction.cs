@@ -2,6 +2,7 @@
 using StreamDeckLib.Messages;
 using System;
 using System.Threading.Tasks;
+using plugins_stream_deck.Models;
 using plugins_stream_deck.WebService;
 
 namespace plugins_stream_deck
@@ -13,11 +14,8 @@ namespace plugins_stream_deck
 
 		public override async Task OnKeyUp(StreamDeckEventPayload args)
 		{
-			var timezone = GetTimeZone();
-
-			var response = await ShouldIDeployTodayServiceProxy.FindOut(timezone);
+			var response = await ShouldIDeployTodayServiceProxy.FindOut(SettingsModel.TimeZone);
 			SettingsModel.ShouldIDeployToday = response.ShouldIDeploy;
-			SettingsModel.TimeZone = response.TimeZone;
 
 			await Manager.SetTitleAsync(args.context, GetRecommendationText());
 
@@ -25,30 +23,24 @@ namespace plugins_stream_deck
 			await Manager.SetSettingsAsync(args.context, SettingsModel);
 
 			await Task.Delay(TimeSpan.FromSeconds(10));
-			await ResetState();
-			await Manager.SetTitleAsync(args.context, UndecidedMessage);
+			ResetState(args);
 		}
 
-		private string GetTimeZone()
-		{
-			var timezone = string.IsNullOrWhiteSpace(SettingsModel.TimeZone)
-				? "Brazil/West"
-				: SettingsModel.TimeZone;
-			return timezone;
-		}
-
-		private async Task ResetState()
+		private async Task ResetState(StreamDeckEventPayload args)
 		{
 			SettingsModel.ShouldIDeployToday = false;
-			SettingsModel.TimeZone = GetTimeZone();
+			await Manager.SetSettingsAsync(args.context, SettingsModel);
+			
+			await Manager.SetTitleAsync(args.context, UndecidedMessage);
 		}
 
 		public override async Task OnDidReceiveSettings(StreamDeckEventPayload args)
 		{
 			await base.OnDidReceiveSettings(args);
+
 			await Manager.SetTitleAsync(args.context, GetRecommendationText());
 		}
-
+		
 		private string GetRecommendationText()
 		{
 			return SettingsModel.ShouldIDeployToday ? "Yes" : "No!";
@@ -58,11 +50,6 @@ namespace plugins_stream_deck
 		{
 			await base.OnWillAppear(args);
 			await Manager.SetTitleAsync(args.context, UndecidedMessage);
-		}
-
-		public override Task OnSendToPlugin(StreamDeckEventPayload args)
-		{
-			return base.OnSendToPlugin(args);
 		}
 	}
 }

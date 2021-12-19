@@ -2,7 +2,7 @@
 {
   public class ShouldIDeployTodaySettingsModel
   {
-	public string TimeZone { get; set; } = "Brazil/West";
+	public string TimeZone { get; set; } = "Turkey";
     public bool ShouldIDeployToday { get; set; } = false;
   }
 }

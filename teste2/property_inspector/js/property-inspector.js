@@ -5,7 +5,7 @@ var websocket = null,
   inInfo = null,
   actionInfo = {},
   settingsModel = {
-	  TimeZone: "",
+	  TimeZone: "Africa/Casablanca",
 	  ShouldIDeployToday: false
   };
 
@@ -20,7 +20,7 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
 	  settingsModel.TimeZone = actionInfo.payload.settings.settingsModel.TimeZone;
   }
 
-  document.getElementById('txtTimeZoneValue').value = settingsModel.TimeZone;
+  document.getElementById('slTimeZoneValue').value = settingsModel.TimeZone;
 
   websocket.onopen = function () {
 	var json = { event: inRegisterEvent, uuid: inUUID };
@@ -34,10 +34,10 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
 	var sdEvent = jsonObj['event'];
 	switch (sdEvent) {
 	  case "didReceiveSettings":
-		if (jsonObj.payload.settings.settingsModel.TimeZone) {
-		  settingsModel.TimeZone = jsonObj.payload.settings.settingsModel.TimeZone;
-		  document.getElementById('txtTimeZoneValue').value = settingsModel.TimeZone;
-		}
+		// if (jsonObj.payload.settings.settingsModel.TimeZone) {
+		//   settingsModel.TimeZone = jsonObj.payload.settings.settingsModel.TimeZone;
+		//   document.getElementById('slTimeZoneValue').value = settingsModel.TimeZone;
+		// }
 		break;
 	  default:
 		break;

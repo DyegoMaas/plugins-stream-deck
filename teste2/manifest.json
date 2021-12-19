@@ -2,7 +2,7 @@
   "Actions": [
     {
       "Icon": "images/actionIcon",
-      "Name": "DeveloperWisdomAction",
+      "Name": "Should I Deploy Today?",
       "States": [
         {
           "Image": "images/actionDefaultImage",
@@ -15,10 +15,10 @@
       "UUID": "br.com.dyegomaas.developerwidson.shouldideploytoday.DefaultPluginAction"
     }
   ],
-	"Category": "Your Plugin Category",
+	"Category": "Developer Wisdom",
 	"CategoryIcon": "images/category/categoryIcon",
 	"Disabled":  false,
-	"Author": "Your Name",
+	"Author": "Dyego Maas",
 	"CodePath": "plugins-stream-deck.exe",
   "PropertyInspectorPath": "property_inspector/property_inspector.html",
   "Description": "Description of DeveloperWisdom.",

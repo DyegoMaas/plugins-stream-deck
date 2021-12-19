@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\Dyego\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Dyego\\.nuget\\packages"
-    ]
-  }
-}

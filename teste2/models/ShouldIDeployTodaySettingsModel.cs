@@ -2,7 +2,7 @@
 {
   public class ShouldIDeployTodaySettingsModel
   {
-	public string TimeZone { get; set; } = "Turkey";
-    public bool ShouldIDeployToday { get; set; } = false;
+	public string TimeZone { get; set; } = "UTC";
+    public bool ShouldIDeployToday { get; set; }
   }
 }

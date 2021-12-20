@@ -5,7 +5,7 @@ var websocket = null,
   inInfo = null,
   actionInfo = {},
   settingsModel = {
-	  TimeZone: "Africa/Casablanca",
+	  TimeZone: "UTC",
 	  ShouldIDeployToday: false
   };
 
